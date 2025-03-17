@@ -54,8 +54,9 @@ async def main():
     async with Actor:
         actor_input = await Actor.get_input() or {}
         logger.info(f"Received input: {actor_input}")
-
-        await Actor.charge(event_name='actor-start-gb')
+        
+        count = (Actor.get_env()['memory_mbytes'] or 1024 + 1023) // 1024
+        await Actor.charge(event_name='actor-start-gb', count=count)
 
         #  Initialize State
         real_estate_query = RealEstateQueryState(**actor_input)
