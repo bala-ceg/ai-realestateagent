@@ -4,7 +4,6 @@ import logging
 from apify import Actor
 from src.tools import search_real_estate
 from src.models import RealEstateQueryState
-from src.ppe_utils import charge_for_actor_start
 
 #  Configure Logging
 logger = logging.getLogger(__name__)
@@ -54,8 +53,6 @@ async def main():
     async with Actor:
         actor_input = await Actor.get_input() or {}
         logger.info(f"Received input: {actor_input}")
-
-        await Actor.charge('actor-start-gb', 1)
         
         #  Initialize State
         real_estate_query = RealEstateQueryState(**actor_input)
