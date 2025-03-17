@@ -55,7 +55,7 @@ async def main():
         actor_input = await Actor.get_input() or {}
         logger.info(f"Received input: {actor_input}")
 
-        await charge_for_actor_start()
+        await Actor.charge(event_name='actor-start-gb')
 
         #  Initialize State
         real_estate_query = RealEstateQueryState(**actor_input)
